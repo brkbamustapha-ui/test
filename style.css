@@ -1,0 +1,146 @@
+:root {
+  --orange: #E25F31;
+  --orange-dark: #B9461F;
+  --cream: #FFCC9A;
+  --cream-light: #FFF4EA;
+  --ink: #3A1B0E;
+  --logo-bg: var(--orange);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Poppins", system-ui, sans-serif;
+  background: var(--orange);
+  color: var(--cream);
+  line-height: 1.6;
+}
+body.is-loading { overflow: hidden; }
+a { color: inherit; }
+
+/* ---------- Logo SVG ---------- */
+.logo-arc { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 3px; fill: currentColor; }
+.logo-name { font-family: "Lilita One", sans-serif; font-size: 62px; letter-spacing: 2px; fill: currentColor; }
+
+/* ---------- Intro 3D ---------- */
+.intro {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 45%, #EC7446 0%, var(--orange) 55%, var(--orange-dark) 100%);
+  perspective: 1000px;
+  transition: opacity .7s ease, visibility .7s ease;
+}
+.intro.is-done { opacity: 0; visibility: hidden; }
+.intro-stage { width: min(70vw, 340px); aspect-ratio: 1; transform-style: preserve-3d; }
+.coin {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  animation: coin-in 3s cubic-bezier(.2, .7, .2, 1) forwards;
+}
+.coin-layer {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--orange);
+  color: var(--cream);
+  box-shadow: inset 0 0 0 4px var(--cream);
+}
+.coin-layer svg { width: 92%; height: 92%; }
+.coin-layer.edge { background: var(--orange-dark); box-shadow: none; }
+.coin-layer.edge svg { display: none; }
+
+@keyframes coin-in {
+  0%   { transform: translateZ(-900px) rotateY(-540deg) rotateX(25deg); opacity: 0; }
+  20%  { opacity: 1; }
+  75%  { transform: translateZ(0) rotateY(-20deg) rotateX(8deg); }
+  100% { transform: translateZ(60px) rotateY(0) rotateX(0); }
+}
+.intro-skip {
+  position: absolute; bottom: 28px; right: 24px;
+  background: none; border: 1px solid var(--cream); color: var(--cream);
+  font: inherit; font-size: .85rem; padding: 6px 16px; border-radius: 999px; cursor: pointer;
+}
+.intro-skip:hover { background: var(--cream); color: var(--orange); }
+
+/* ---------- Navigation ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 24px;
+  background: var(--orange);
+  border-bottom: 1px solid rgba(255, 204, 154, .25);
+}
+.nav-logo { width: 54px; height: 54px; color: var(--cream); display: block; }
+.nav nav { display: flex; gap: 24px; }
+.nav nav a { text-decoration: none; font-weight: 600; }
+.nav nav a:hover { color: #fff; }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: calc(100vh - 75px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 40px 16px;
+}
+.hero-logo { width: min(80vw, 380px); height: min(80vw, 380px); color: var(--cream); }
+.hero-tag { font-size: 1.15rem; margin: 8px 0 28px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 600;
+  padding: 12px 28px; border-radius: 999px;
+  background: var(--cream); color: var(--orange);
+  border: 2px solid var(--cream);
+  transition: transform .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--cream); }
+
+/* ---------- Sections ---------- */
+.section { padding: 80px 16px; text-align: center; }
+.section > * { max-width: 960px; margin-left: auto; margin-right: auto; }
+.section.light { background: var(--cream-light); color: var(--ink); }
+.section.light h2 { color: var(--orange); }
+h2 { font-family: "Lilita One", sans-serif; font-weight: 400; font-size: clamp(2.2rem, 6vw, 3rem); letter-spacing: 1px; }
+.lead { margin: 4px auto 40px; opacity: .85; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.card {
+  background: #fff; border-radius: 20px; padding: 32px 24px;
+  border: 2px solid var(--cream);
+}
+.card-icon { font-size: 2.4rem; }
+.card h3 { font-family: "Lilita One", sans-serif; font-weight: 400; font-size: 1.5rem; color: var(--orange); margin: 8px 0 4px; }
+.note { margin-top: 32px; }
+.note a { color: var(--orange); font-weight: 600; }
+
+/* ---------- Contact ---------- */
+.contact { display: grid; gap: 32px; margin-top: 32px; }
+.contact-list { list-style: none; display: grid; gap: 14px; }
+.contact-list li { display: flex; flex-direction: column; }
+.contact-list .label { font-size: .8rem; text-transform: uppercase; letter-spacing: 2px; opacity: .8; }
+.contact-list a { text-decoration: none; font-weight: 600; }
+.socials { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.social {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; font-weight: 600;
+  padding: 10px 20px; border-radius: 999px;
+  border: 2px solid var(--cream);
+  transition: background .2s ease, color .2s ease;
+}
+.social svg { width: 22px; height: 22px; }
+.social:hover { background: var(--cream); color: var(--orange); }
+.map {
+  display: block; width: 100%; height: 340px; margin-top: 40px;
+  border: 3px solid var(--cream); border-radius: 20px;
+}
+
+.footer { text-align: center; padding: 24px 16px; font-size: .85rem; border-top: 1px solid rgba(255, 204, 154, .25); }
+
+/* ---------- Apparition au scroll ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .coin { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
